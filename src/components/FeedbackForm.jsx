@@ -34,11 +34,15 @@ export default function FeedbackForm() {
 
   if (submitted) {
     return (
-      <div className="feedback-form submitted">
+      <div className="feedback-form submitted fade-in">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{margin: '0 auto 20px', display: 'block'}}>
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <path d="M22 4L12 14.01l-3-3"></path>
+        </svg>
         <h2>Thank You!</h2>
-        <p>Your feedback has been submitted anonymously.</p>
-        <button onClick={() => setSubmitted(false)} className="btn-primary">
-          Submit more feedback
+        <p>Your feedback has been securely submitted, totally anonymously.</p>
+        <button onClick={() => setSubmitted(false)} className="btn-primary" style={{maxWidth: '250px', margin: '0 auto'}}>
+          Submit More Feedback
         </button>
       </div>
     )
@@ -46,7 +50,6 @@ export default function FeedbackForm() {
 
   return (
     <form onSubmit={handleSubmit} className="feedback-form">
-      <h2>Send us your feedback</h2>
       
       <div className="form-group">
         <label htmlFor="category">Category</label>
@@ -68,8 +71,8 @@ export default function FeedbackForm() {
         <label htmlFor="message">Your Message</label>
         <textarea
           id="message"
-          rows="5"
-          placeholder="Type your feedback here..."
+          rows="6"
+          placeholder="Share your thoughts honestly here..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           required
@@ -79,8 +82,24 @@ export default function FeedbackForm() {
       {error && <div className="error-message">{error}</div>}
 
       <button type="submit" disabled={loading} className="btn-primary">
-        {loading ? 'Submitting...' : 'Submit Feedback'}
+        {loading ? (
+          <>
+            <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+            </svg>
+            Submitting...
+          </>
+        ) : (
+          <>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+            Submit Securely
+          </>
+        )}
       </button>
     </form>
   )
 }
+
